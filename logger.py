@@ -1,4 +1,5 @@
 from flask import Flask, request
+from flask_cors import CORS
 import json
 from datetime import datetime
 import os
@@ -8,6 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)  # Abilita il CORS per tutte le rotte
 
 # Leggi le variabili di configurazione dal file .env
 PORT = int(os.getenv('PORT', 5000))
@@ -38,5 +40,4 @@ def log_json():
     return f'Dati salvati nel file {filepath}', 200
 
 if __name__ == '__main__':
-    app.run(debug=True, port=PORT)
-
+    app.run(host="0.0.0.0", port=PORT)
